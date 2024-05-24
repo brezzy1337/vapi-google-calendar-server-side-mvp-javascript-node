@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getRandomName } from '../../functions/getRandomName';
+import { google } from 'googleapis'; 
 import { VapiPayload, VapiWebhookEnum } from '../../types/vapi.types';
 
 /**
@@ -9,7 +9,7 @@ import { VapiPayload, VapiWebhookEnum } from '../../types/vapi.types';
  * If the function name is not found, it logs an error message and throws an exception indicating the function is not found.
  * This handler is a basic example of how to implement function calls in Vapi without referring to other webhook handlers.
  */
-export const basic = async (req: Request, res: Response) => {
+export const googleCalendarPush = async (req: Request, res: Response) => {
   try {
     const payload = req.body.message as VapiPayload;
 
@@ -22,13 +22,7 @@ export const basic = async (req: Request, res: Response) => {
 
       const { name, parameters } = functionCall;
       console.log('functionCall', functionCall);
-      if (name === 'getRandomName') {
-        const result = await getRandomName(parameters);
-        return res.status(201).json(result);
-      } else {
-        console.log(`Function ${name} not found`);
-        throw new Error(`Function ${name} not found`);
-      }
+      
     }
 
     return res.status(201).json({});
