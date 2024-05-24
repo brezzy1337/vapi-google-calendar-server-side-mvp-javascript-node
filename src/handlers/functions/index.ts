@@ -1,7 +1,7 @@
-import { basic } from './basic';
+import { googleCalendarPush } from './googleCalenderPush';
 import { rag } from './rag';
 
 export const functionsCallHandler = {
-  basic: basic,
+  googleCalendarPush: googleCalendarPush,
   rag: rag,
 };
