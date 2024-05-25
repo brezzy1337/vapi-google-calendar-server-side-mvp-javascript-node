@@ -21,7 +21,6 @@ router.post(
   customLLMHandler.openaiAdvanced
 );
 
-router.post('/functions/basic', functionsCallHandler.basic);
-router.post('/functions/rag', functionsCallHandler.rag);
+router.post('/functions/basic', functionsCallHandler.googleCalendarPush);
 
 export { router };
