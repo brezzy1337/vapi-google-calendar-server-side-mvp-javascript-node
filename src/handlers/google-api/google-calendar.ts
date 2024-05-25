@@ -3,16 +3,10 @@ import { google } from 'googleapis';
 import { oAuth2Client } from 'src/utils/google.utils'; 
 import { VapiPayload, VapiWebhookEnum } from '../../types/vapi.types';
 
-// Set the access token (you might need to get this from your authentication flow)
-oAuth2Client.setCredentials({
-  access_token: process.env.GOOGLE_ACCESS_TOKEN,
-  refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
-});
-
 /**
  * Handles POST requests from Vapi to perform function calls.
- * Specifically, it processes the `googleCalendarPush` function call,
- * which creates an event in Google Calendar.
+ * Specifically, it processes the `googleCalendar` function call,
+ * which creates an event in Google Calendar meeting based on the payload given by vapi.
  */
 
 export const googleCalendar = async (req: Request, res: Response) => {
