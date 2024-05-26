@@ -9,7 +9,7 @@ import { VapiPayload, VapiWebhookEnum } from '../../types/vapi.types';
  * which creates an event in Google Calendar meeting based on the payload given by vapi.
  */
 
-export const googleCalendar = async (req: Request, res: Response) => {
+export const scheduleGoogleMeeting = async (req: Request, res: Response) => {
     try {
       const payload = req.body.message as VapiPayload;
   

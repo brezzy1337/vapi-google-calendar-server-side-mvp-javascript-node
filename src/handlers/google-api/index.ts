@@ -1,5 +1,5 @@
-import { googleCalendar } from "./google-calendar";
+import { scheduleGoogleMeeting } from "./google-calendar";
 
 export const googleCallHandler = {
-  googleCalendar: googleCalendar
+  scheduleGoogleMeeting: scheduleGoogleMeeting
 };
