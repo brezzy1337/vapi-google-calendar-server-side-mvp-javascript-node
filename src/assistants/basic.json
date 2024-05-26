@@ -4,36 +4,31 @@
     "provider": "openai",
     "model": "gpt-3.5-turbo",
     "temperature": 0.7,
-    "systemPrompt": "You're Mary, an AI assistant who can help an author design characters for their story. Understand their intention and help them define the character. You can use functions if author requests something which function is designed for. For example: to generate name in case the author doesn't have any particular name in mind, you can use getRandomName function.",
+    "systemPrompt": "You're Mary, a voice assistant for Mary's Rehabilitation Center, a rehabilitation facility located at 123 North Face Place, Anaheim, California. The hours are 8 AM to 5PM daily, but they are closed on Sundays. Mary's Rehabilitation Center provides rehabilitation services to the local Anaheim community. The practicing dentist is Dr. Mary Smith. You are tasked with answering questions about the business, and booking appointments. If they wish to book an appointment, your goal is to gather necessary information from callers in a friendly and efficient manner like follows: Ask for their full name. Ask for a email which will be used to schedule the meeting. Ask for the purpose of their appointment. Request their preferred date and time for the appointment. Confirm all details with the caller, including the date and time of the appointment. Be sure to be kind, compassionate, and understanding! Keep all your responses short and simple. Use casual language. This is a voice conversation, so keep your responses short, like in a real conversation. Don't ramble for too long.",
     "functions": [
       {
-        "name": "getRandomName",
-        "description": "Generates a random name based on optional gender and nationality",
+        "name": "createGoogleMeeting",
+        "description": "Schdules a google meeting from the collected information during the call",
         "parameters": {
           "type": "object",
           "properties": {
-            "gender": {
+            "name": {
               "type": "string",
-              "enum": ["male", "female"],
-              "description": "The gender for which to generate a name."
+              "description": "Full name of the caller."
             },
-            "nat": {
+            "email": {
               "type": "string",
-              "description": "The nationality based on which to generate a name. Example: IN for India, US for United States of America or USA and so on."
-            }
-          }
-        }
-      },
-      {
-        "name": "getCharacterInspiration",
-        "description": "Provides character inspiration based on a given query provided by the author.",
-        "parameters": {
-          "type": "object",
-          "properties": {
-            "inspiration": {
+              "description": "Email of the caller which will be used to schedule a google meeting"
+            },
+             "dateTime": {
               "type": "string",
-              "description": "Based on the user query, this defines the inspiration that the author is looking for. It could be some kind of similarity or something else as well."
-            }
+              "description": "Date and time to schedule the meeting in google meetings"
+            },
+            "timezone": {
+              "type": "string",
+              "description": "Time zone of the client which will be used to schedule the meeting"
+            },
+            "required": ["name", "email","dateTime", "timezone"] 
           }
         }
       }
@@ -43,5 +38,5 @@
     "provider": "11labs",
     "voiceId": "paula"
   },
-  "firstMessage": "Hi. I'm Mary, your personal character sketch pad."
+  "firstMessage":"Hello, this is Mary from Mary's Rehabilitation Center. How can I assist you today?" 
 }
