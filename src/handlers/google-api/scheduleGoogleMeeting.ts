@@ -9,6 +9,13 @@ import { VapiPayload, VapiWebhookEnum } from '../../types/vapi.types';
  * which creates an event in Google Calendar meeting based on the payload given by vapi.
  */
 
+interface scheduleEventParameters {
+  fullName: string;
+  summary: string;
+  start: string;
+  email: string;
+}
+
 export const scheduleGoogleMeeting = async (req: Request, res: Response) => {
   
   const calendar = google.calendar({ version: 'v3', auth: oAuth2Client });
@@ -27,9 +34,8 @@ export const scheduleGoogleMeeting = async (req: Request, res: Response) => {
   
         if (name === 'scheduleGoogleMeeting') {
           // Extract event details from parameters
-          const { fullName, summary, start, email } = parameters;
-          const attendees = { email, "devin.phat97@gmail.com" };
-
+          const { fullName, summary, start, email } = parameters as unknown as scheduleEventParameters;
+          
           // Parse the start time
           const startTime: Date = new Date(start);
 
@@ -49,8 +55,11 @@ export const scheduleGoogleMeeting = async (req: Request, res: Response) => {
               dateTime: endTime, // Ensure this is in the correct format (ISO 8601)
               timeZone: 'America/Los_Angeles', // Adjust the timezone as needed
             },
-            attendees: attendees.map((email: string) => ({ email })),
-          };
+            attendees: [
+            ...email.map(email => ({ email })),
+            { email: 'devin.phat97@gmail.com' }
+          ],
+        };
   
           // Insert the event into the calendar
           const response = await calendar.events.insert({
