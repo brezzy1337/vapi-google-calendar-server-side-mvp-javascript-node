@@ -25,20 +25,28 @@ export const scheduleGoogleMeeting = async (req: Request, res: Response) => {
   
         const { name, parameters } = functionCall;
   
-        if (name === 'createCalendarEvent') {
+        if (name === 'scheduleGoogleMeeting') {
           // Extract event details from parameters
-          const { summary, description, start, end, attendees } = parameters;
-  
+          const { fullName, summary, start, email } = parameters;
+          const attendees = { email, "devin.phat97@gmail.com" };
+
+          // Parse the start time
+          const startTime: Date = new Date(start);
+
+          // Calculate the end time (one hour after start time)
+          const endTime: Date = new Date(startTime);
+          endTime.setHours(startTime.getHours() + 1);
+          
           // Prepare the event object
           const event = {
+            displayname: fullName,
             summary: summary,
-            description: description,
             start: {
-              dateTime: start, // Ensure this is in the correct format (ISO 8601)
+              dateTime: startTime, // Ensure this is in the correct format (ISO 8601)
               timeZone: 'America/Los_Angeles', // Adjust the timezone as needed
             },
             end: {
-              dateTime: end, // Ensure this is in the correct format (ISO 8601)
+              dateTime: endTime, // Ensure this is in the correct format (ISO 8601)
               timeZone: 'America/Los_Angeles', // Adjust the timezone as needed
             },
             attendees: attendees.map((email: string) => ({ email })),
