@@ -1,4 +1,4 @@
-import { scheduleGoogleMeeting } from "./google-calendar";
+import { scheduleGoogleMeeting } from "./scheduleGoogleMeeting"
 
 export const googleCallHandler = {
   scheduleGoogleMeeting: scheduleGoogleMeeting

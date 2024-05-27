@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { inboundHandler } from './handlers/inbound';
 import { outboundHandler } from './handlers/outbound';
 import { webhookHandler } from './handlers/webhook';
-import { scheduleGoogleMeeting } from './handlers/google-api/google-calendar';
+import { scheduleGoogleMeeting } from './handlers/google-api/scheduleGoogleMeeting';
 
 const router = Router();
 

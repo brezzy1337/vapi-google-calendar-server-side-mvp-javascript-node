@@ -10,6 +10,9 @@ import { VapiPayload, VapiWebhookEnum } from '../../types/vapi.types';
  */
 
 export const scheduleGoogleMeeting = async (req: Request, res: Response) => {
+  
+  const calendar = google.calendar({ version: 'v3', auth: oAuth2Client });
+
     try {
       const payload = req.body.message as VapiPayload;
   
@@ -40,8 +43,6 @@ export const scheduleGoogleMeeting = async (req: Request, res: Response) => {
             },
             attendees: attendees.map((email: string) => ({ email })),
           };
-  
-          const calendar = google.calendar({ version: 'v3', auth: oAuth2Client });
   
           // Insert the event into the calendar
           const response = await calendar.events.insert({
